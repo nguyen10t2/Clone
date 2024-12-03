@@ -6,20 +6,19 @@ import org.openqa.selenium.WebElement;
 
 
 public class KOLSearch {
-	private  String searchKeyword;
+    private String searchKeyword;
     private WebDriver driver;
-	private WebElement searchBox;
+    private WebElement searchBox;
 
     public KOLSearch(WebDriver driver) {
         this.driver = driver;
     }
-	
-	public void setsearchKeyword(String searchKeyword) {
-		this.searchKeyword = searchKeyword;
-	}
-	
-	public void searchKOL()
-	{	
+
+    public void setsearchKeyword(String searchKeyword) {
+        this.searchKeyword = searchKeyword;
+    }
+
+    public void searchKOL() {
 		WebElement searchBox = driver.findElement(By.cssSelector("input[data-testid='SearchBox_Search_Input']"));
         searchBox.sendKeys(searchKeyword);
         searchBox.submit();
