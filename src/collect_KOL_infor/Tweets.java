@@ -26,10 +26,10 @@ public class Tweets extends CollectX {
                     try {
                         // Tìm phần tử chứa URL bài tweet
                         WebElement ownerElement = tweet.findElement(By.xpath(".//a[contains(@href, '/status/')]"));
-                        String tweetUrl = ownerElement.getAttribute("href");
+                        String tweetUrl = ownerElement.getDomAttribute("href");
 
                         WebElement userElement = tweet.findElement(By.xpath(".//div[@data-testid='User-Name']//a"));
-                        String ownerName = userElement.getAttribute("href");
+                        String ownerName = userElement.getDomAttribute("href");
                         
                         String entry = tweetUrl + " "  + ownerName;
                         this.collection.add(entry);
