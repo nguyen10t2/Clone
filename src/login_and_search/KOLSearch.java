@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-
 public class KOLSearch {
     private String searchKeyword;
     private WebDriver driver;
@@ -19,25 +18,26 @@ public class KOLSearch {
     }
 
     public void searchKOL() {
-		WebElement searchBox = driver.findElement(By.cssSelector("input[data-testid='SearchBox_Search_Input']"));
+        WebElement searchBox = driver.findElement(By.cssSelector("input[data-testid='SearchBox_Search_Input']"));
         searchBox.sendKeys(searchKeyword);
         searchBox.submit();
-        
+
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        
-        WebElement peopleTab = driver.findElement(By.xpath("//a[contains(@href, '/search?q=') and contains(., 'People')]"));
+
+        WebElement peopleTab = driver
+                .findElement(By.xpath("//a[contains(@href, '/search?q=') and contains(., 'People')]"));
         peopleTab.click();
-        
+
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-	}
+    }
 
     public void init(String searchKeyword) {
         setSearchKeyword(searchKeyword);
@@ -60,5 +60,4 @@ public class KOLSearch {
         this.searchBox = searchBox;
     }
 
-    
 }
