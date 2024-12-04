@@ -1,13 +1,9 @@
 package main;
 
-import java.io.File;
-import java.net.URL;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
 
 import login_and_search.KOLSearch;
 import login_and_search.LoginEngine;
@@ -20,20 +16,16 @@ public class KOLCollection {
     public static void runKOLCollection() {
         try {
             String hashtag = "";
-            URL url = KOLCollection.class.getProtectionDomain().getCodeSource().getLocation();
-            
-            String decodedPath = URLDecoder.decode(url.getPath(), StandardCharsets.UTF_8.name());
-            
-            File parentFile = new File(decodedPath);
-            String chromeDriverPath = parentFile.getPath() + "\\resources\\chromedriver.exe";
-            String hashtagFilePath = parentFile.getPath() + "\\resources\\hashtag.txt";
+
+            String chromeDriverPath = getSourcePath("resources/chromedriver.exe");
+            String hashtagFilePath = getSourcePath("resources/hashtag.txt");
 
             System.setProperty("webdriver.chrome.driver", chromeDriverPath);
 
             try (BufferedReader br = new BufferedReader(new FileReader(hashtagFilePath))) {
                 hashtag = br.readLine();
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("An error occurred in KOLCollection.");
             }
 
             LoginEngine login = new TwitterLogin();
@@ -46,15 +38,22 @@ public class KOLCollection {
             FileRecorded fileRecorded = new FileRecorded(login.getWebDriver());
             fileRecorded.getKOLs().setCollectLimitation(200);
             fileRecorded.getKOLs().crawlingInfor();
+            System.out.println("Crawling information successfully");
 
             fileRecorded.getKOLs().setCollection(fileRecorded.getKOLs().getCollection());
-            fileRecorded.settingFile(login.getWebDriver());
+            System.out.println("Set collection successfully");
 
+            fileRecorded.settingFile(login.getWebDriver());
+            System.out.println("Setting file successfully");
 
             login.close();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("An error occurred in KOLCollection.");
         }
+    }
+    public static String getSourcePath(String textName) {
+        ClassLoader classLoader = KOLCollection.class.getClassLoader();
+        return classLoader.getResource(textName).getPath().replace("\\", "/").substring(1);
     }
 }

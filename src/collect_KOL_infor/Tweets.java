@@ -53,7 +53,7 @@ public class Tweets extends CollectX {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("An error occurred in Tweets.");
         } 
     }
 }

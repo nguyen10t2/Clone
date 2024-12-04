@@ -37,7 +37,7 @@ public abstract class CollectX {
 
                 // Thu thập dữ liệu
                 for (WebElement profile : kolProfiles) {
-                    String url = profile.findElement(By.cssSelector("a")).getDomAttribute("href");
+                    String url = profile.findElement(By.cssSelector("a")).getAttribute("href");
 
                     collection.add(url);
 
@@ -92,7 +92,5 @@ public abstract class CollectX {
     public void setCollection(HashSet<String> collection) {
         this.collection = collection;
     }
-
-    
     
 }

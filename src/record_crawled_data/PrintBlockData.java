@@ -49,7 +49,7 @@ public class PrintBlockData {
         try {
             writer.append(logInfor + "\n");
         } catch(IOException e) {
-            e.printStackTrace();
+            System.out.println("An error occurred in PrintBlockData.");
         }
     }
 
