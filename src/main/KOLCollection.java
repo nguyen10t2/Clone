@@ -9,18 +9,17 @@ import login_and_search.KOLSearch;
 import login_and_search.LoginEngine;
 import login_and_search.TwitterLogin;
 import record_crawled_data.FileRecorded;
-
-
+import Enum.*;
 
 public class KOLCollection {
     public static void runKOLCollection() {
         try {
             String hashtag = "";
 
-            String chromeDriverPath = getSourcePath("resources/chromedriver.exe");
-            String hashtagFilePath = getSourcePath("resources/hashtag.txt");
+            String chromeDriverPath = GetSource.pathOfChromeDriver;
+            String hashtagFilePath = GetSource.pathOfHashTag;
 
-            System.setProperty("webdriver.chrome.driver", chromeDriverPath);
+            System.setProperty(GetSource.webChrome, chromeDriverPath);
 
             try (BufferedReader br = new BufferedReader(new FileReader(hashtagFilePath))) {
                 hashtag = br.readLine();
@@ -29,14 +28,14 @@ public class KOLCollection {
             }
 
             LoginEngine login = new TwitterLogin();
-            login.init("https://x.com/login");
+            login.init(GetSource.webLoginTwitter);
 
             KOLSearch search = new KOLSearch(login.getWebDriver());
             search.init(hashtag);
 
 
             FileRecorded fileRecorded = new FileRecorded(login.getWebDriver());
-            fileRecorded.getKOLs().setCollectLimitation(200);
+            fileRecorded.getKOLs().setCollectLimitation(GetSource.collectionLimitation);
             fileRecorded.getKOLs().crawlingInfor();
             System.out.println("Crawling information successfully");
 
@@ -51,9 +50,5 @@ public class KOLCollection {
         } catch (Exception e) {
             System.out.println("An error occurred in KOLCollection.");
         }
-    }
-    public static String getSourcePath(String textName) {
-        ClassLoader classLoader = KOLCollection.class.getClassLoader();
-        return classLoader.getResource(textName).getPath().replace("\\", "/").substring(1);
     }
 }

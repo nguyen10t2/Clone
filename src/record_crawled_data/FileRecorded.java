@@ -7,15 +7,14 @@ import java.util.HashSet;
 
 import org.openqa.selenium.WebDriver;
 
+import Enum.GetSource;
 import collect_KOL_infor.KOL;
-import main.KOLCollection;
 
 public class FileRecorded {
 
-    private String filepath = KOLCollection.getSourcePath("output/data.csv");
+    private String filepath = GetSource.pathfOutput;
     private KOL KOLs;
     private int countBlocks = 0;
-    private final int MAX_BLOCKS = 50;
 
     public FileRecorded(WebDriver driver) {
         this.KOLs = new KOL(driver);
@@ -33,13 +32,13 @@ public class FileRecorded {
                 for (String entry : KOLs) {
                     PrintBlockData node = new PrintBlockData(driver);
 
-                    if (node.getInfor().getFollowers().getKOLNumberOfFollowers(entry) >= 50000) {
+                    if (node.getInfor().getFollowers().getKOLNumberOfFollowers(entry) >= GetSource.maxOfFolowers) {
                         node.printFile(entry, fw);
                         this.countBlocks++;
                         System.out.println("Save node data successfully");
                     }
 
-                    if (this.countBlocks >= MAX_BLOCKS) {
+                    if (this.countBlocks >= GetSource.MAX_BLOCKS) {
                         break;
                     }
                 }
