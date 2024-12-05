@@ -16,7 +16,9 @@ public class TwitterLogin implements LoginEngine {
 	private String url;
 
 	public TwitterLogin() {
-		this.driver = new ChromeDriver();
+  ChromeOptions options = new ChromeOptions();
+  options.addArguments("--disable-images", "--disable-javascript");
+  this.driver = new ChromeDriver(options);
 		this.account = new AccountDetails();
 	}
 
