@@ -90,4 +90,5 @@
 	<classpathentry kind="lib" path="libs/selenium-support-4.27.0.jar"/>
 	<classpathentry kind="lib" path="libs/selenium-support-4.27.0-sources.jar"/>
 	<classpathentry kind="src" path="Enum"/>
+ <classpathentry kind="src" path="output"/>
 </classpath>
