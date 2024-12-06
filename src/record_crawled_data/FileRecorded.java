@@ -12,7 +12,7 @@ import collect_KOL_infor.KOL;
 
 public class FileRecorded {
 
-    private String filepath = GetSource.pathfOutput;
+    private String filepath = GetSource.pathOfOutput;
     private KOL KOLs;
     private int countBlocks = 0;
 

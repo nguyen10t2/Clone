@@ -1,6 +1,8 @@
 package collect_KOL_infor;
 
+import java.sql.Array;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 

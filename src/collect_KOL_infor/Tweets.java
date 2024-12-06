@@ -45,7 +45,7 @@ public class Tweets extends CollectX {
 
                 // Cuộn trang xuống để tải thêm nội dung
                 js.executeScript("window.scrollBy(0, 1000);");
-                Thread.sleep(3000); // Chờ nội dung tải thêm
+                Thread.sleep(1500); // Chờ nội dung tải thêm
                 scrollCount++;
 
                 if(checkBreak == false) {
